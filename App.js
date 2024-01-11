@@ -7,6 +7,7 @@ import { launchImageLibraryAsync } from "expo-image-picker";
 import { useState } from "react";
 import Options from "./components/common/Options";
 import EmojiPicker from "./components/common/EmojiPicker";
+import EmojiList from "./components/common/EmojiList";
 
 export default function App() {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -27,6 +28,10 @@ export default function App() {
 
   const onReset = () => {
     setShowAppOptions(false);
+  };
+
+  const setPickedEmoji = () => {
+    setIsModalVisible(false);
   };
 
   return (
@@ -60,7 +65,7 @@ export default function App() {
         isVisible={isModalVisible}
         onClose={() => setIsModalVisible(false)}
       >
-        {/* A list of emoji component will go here */}
+        <EmojiList onSelect={setPickedEmoji} />
       </EmojiPicker>
       <StatusBar style="auto" />
     </View>
