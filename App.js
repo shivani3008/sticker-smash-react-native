@@ -8,11 +8,13 @@ import { useState } from "react";
 import Options from "./components/common/Options";
 import EmojiPicker from "./components/common/EmojiPicker";
 import EmojiList from "./components/common/EmojiList";
+import EmojiSticker from "./components/common/EmojiSticker";
 
 export default function App() {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [showAppOptions, setShowAppOptions] = useState(false);
   const [selectedImage, setSelectedImage] = useState();
+  const [pickedEmoji, setPickedEmoji] = useState(null);
 
   const pickImageAsync = async () => {
     const result = await launchImageLibraryAsync({
@@ -30,7 +32,8 @@ export default function App() {
     setShowAppOptions(false);
   };
 
-  const setPickedEmoji = () => {
+  const onSelectEmoji = (value) => {
+    setPickedEmoji(value);
     setIsModalVisible(false);
   };
 
@@ -41,6 +44,9 @@ export default function App() {
           placeholderImageSource={placeholderImage}
           selectedImage={selectedImage}
         />
+        {pickedEmoji ? (
+          <EmojiSticker imageSize={40} stickerSource={pickedEmoji} />
+        ) : null}
       </View>
       {showAppOptions ? (
         <Options
@@ -65,7 +71,7 @@ export default function App() {
         isVisible={isModalVisible}
         onClose={() => setIsModalVisible(false)}
       >
-        <EmojiList onSelect={setPickedEmoji} />
+        <EmojiList onSelect={onSelectEmoji} />
       </EmojiPicker>
       <StatusBar style="auto" />
     </View>
