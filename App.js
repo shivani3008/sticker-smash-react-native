@@ -6,10 +6,12 @@ import Button, { buttonType } from "./components/pattern/Button";
 import { launchImageLibraryAsync } from "expo-image-picker";
 import { useState } from "react";
 import Options from "./components/common/Options";
+import EmojiPicker from "./components/common/EmojiPicker";
 
 export default function App() {
-  const [selectedImage, setSelectedImage] = useState();
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const [showAppOptions, setShowAppOptions] = useState(false);
+  const [selectedImage, setSelectedImage] = useState();
 
   const pickImageAsync = async () => {
     const result = await launchImageLibraryAsync({
@@ -36,7 +38,10 @@ export default function App() {
         />
       </View>
       {showAppOptions ? (
-        <Options onReset={onReset} />
+        <Options
+          onReset={onReset}
+          onAddSticker={() => setIsModalVisible(true)}
+        />
       ) : (
         <View style={styles.footerContainer}>
           <Button
@@ -51,6 +56,12 @@ export default function App() {
           />
         </View>
       )}
+      <EmojiPicker
+        isVisible={isModalVisible}
+        onClose={() => setIsModalVisible(false)}
+      >
+        {/* A list of emoji component will go here */}
+      </EmojiPicker>
       <StatusBar style="auto" />
     </View>
   );

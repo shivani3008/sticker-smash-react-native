@@ -1,11 +1,7 @@
 import { StyleSheet, View } from "react-native";
 import IconButton from "../pattern/IconButton";
 
-const Options = ({ onReset }) => {
-  const onAddSticker = () => {
-    // we will implement this later
-  };
-
+const Options = ({ onReset, onAddSticker }) => {
   const onSaveImageAsync = async () => {
     // we will implement this later
   };
