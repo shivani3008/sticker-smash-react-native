@@ -1,21 +1,31 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
-import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { Ionicons } from "@expo/vector-icons";
 
-const Button = ({ label, onPress, icon, type }) => {
-  const style = type === "primary" ? primaryStyles : styles;
+export const buttonType = {
+  PRIMARY: "PRIMARY",
+  GHOST: "GHOST",
+};
+
+const Button = ({
+  label = "",
+  icon = "",
+  type = buttonType.PRIMARY,
+  onPress,
+}) => {
+  const style = type === buttonType.PRIMARY ? primaryStyles : styles;
 
   return (
     <View style={style.buttonContainer}>
       <Pressable style={style.button} onPress={onPress}>
         {icon ? (
-          <FontAwesome
+          <Ionicons
             name={icon}
-            size={18}
+            size={20}
             color="#25292e"
             style={style.buttonIcon}
           />
         ) : null}
-        <Text style={style.buttonLabel}>{label}</Text>
+        {label ? <Text style={style.buttonLabel}>{label}</Text> : null}
       </Pressable>
     </View>
   );
