@@ -120,7 +120,7 @@ export default function App() {
       >
         <EmojiList onSelect={onSelectEmoji} />
       </EmojiPicker>
-      <StatusBar style="auto" />
+      <StatusBar style="light" />
     </GestureHandlerRootView>
   );
 }
